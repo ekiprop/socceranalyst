@@ -1,0 +1,60 @@
+
+<!DOCTYPE html>
+<html>
+{% extends "daily_odds/base.html" %}
+{% load static %}
+{% block header %} <h4> Tips</h4> {% endblock %}
+
+{% block content %}
+<p>{{dailysub.country}} -- {{dailysub.prediction}}</p>
+
+
+{% if dailysub %}
+
+<table class="table table-striped ">
+    <thead>
+     <tr>
+         <th>Stats</th>
+         <th>{{dailysub.home_team}}</th>
+         <th>Draw</th>
+         <th>{{dailysub.away_team}}</th>
+     </tr>
+    </thead>
+    <tbody>
+     <tr>
+         <td>H2H</td>
+         <td>{{dailysub.h2h_home}}</td>
+         <td>{{dailysub.h2h_draw}}</td>
+         <td>{{dailysub.h2h_away}}</td>
+     </tr>
+    <tr>
+         <td>Standings</td>
+         <td>{{dailysub.standings_home}}</td>
+         <td>-</td>
+         <td>{{dailysub.standings_away}}</td>
+     </tr>
+    <tr>
+         <td>Form</td>
+         <td>{{dailysub.form_home}}</td>
+         <td>-</td>
+         <td>{{dailysub.form_away}}</td>
+     </tr>
+    <tr>
+         <td>GS:GC</td>
+         <td>{{dailysub.goals_home}}</td>
+         <td>-</td>
+         <td>{{dailysub.goals_away}}</td>
+     </tr>
+    <tr>
+         <td>Missing Players</td>
+         <td>{{dailysub.missing_players_home}}</td>
+         <td>-</td>
+         <td>{{dailysub.missing_players_away}}</td>
+     </tr>
+
+    </tbody>
+</table>
+{% endif%}
+
+{% endblock %}
+</html>

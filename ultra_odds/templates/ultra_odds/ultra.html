@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+{% extends "daily_odds/base.html" %}
+{% load static %}
+{% block title %} Soccer {% endblock title%}
+{% block header %} <h4> Tips</h4> {% endblock %}
+
+{% block content %}
+
+{% for ultramain in latest_ultra_list  %}
+  {% if ultramain.recent_slips %}
+
+
+<h2>{{ultramain.slip_date}}</h2>
+<ul>
+
+
+      <table class="table table-striped ">
+
+          <thead class="thead-dark ">
+                 <tr>
+                     <th scope="col">Date</th>
+                     <th scope="col">country</th>
+                     <th scope="col">home team</th>
+                     <th scope="col">away team</th>
+                     <th scope="col">prediction</th>
+                     <th scope="col">outcome</th>
+
+                 </tr>
+
+          </thead>
+
+
+      {% for ultrasub in ultramain.ultrasub_set.all %}
+
+
+
+          {% if ultrasub.outcome == null %}
+
+              <tbody class="{% cycle 'odd' 'even' %}">
+
+                 <tr>
+                   <td><a class="nav-link" href="{% url 'ultra_odds:ultradet' ultrasub.id %}">{{ultrasub.match_date}}</a></td>
+                   <td><a class="nav-link" href="{% url 'ultra_odds:ultradet' ultrasub.id %}">{{ultrasub.country}}</a></td>
+                   <td><a class="nav-link" href="{% url 'ultra_odds:ultradet' ultrasub.id %}">{{ultrasub.home_team}}</a></td>
+                   <td><a class="nav-link" href="{% url 'ultra_odds:ultradet' ultrasub.id %}">{{ultrasub.away_team}}</a></td>
+                   <td><a class="nav-link" href="{% url 'ultra_odds:ultradet' ultrasub.id %}">{{ultrasub.prediction}}</a></td>
+                   <td><a class="p-2 mb-1 bg-warning text-dark" href="{% url 'ultra_odds:ultradet' ultrasub.id %}">Running...</a></td>
+                 </tr>
+              </tbody>
+
+          {% elif ultrasub.outcome == ultrasub.prediction %}
+               <tbody class="{% cycle 'odd' 'even' %}">
+                 <tr>
+                   <td><a class="nav-link" href="{% url 'ultra_odds:ultradet' ultrasub.id %}">{{ultrasub.match_date}}</a></td>
+                   <td><a class="nav-link" href="{% url 'ultra_odds:ultradet' ultrasub.id %}">{{ultrasub.country}}</a></td>
+                   <td><a class="nav-link" href="{% url 'ultra_odds:ultradet' ultrasub.id %}">{{ultrasub.home_team}}</a></td>
+                   <td><a class="nav-link" href="{% url 'ultra_odds:ultradet' ultrasub.id %}">{{ultrasub.away_team}}</a></td>
+                   <td><a class="nav-link" href="{% url 'ultra_odds:ultradet' ultrasub.id %}">{{ultrasub.prediction}}</a></td>
+                   <td><a class="p-2 mb-1 bg-success text-white" href="{% url 'ultra_odds:ultradet' ultrasub.id %}">{{ultrasub.outcome}}</a></td>
+                 </tr>
+              </tbody>
+          {% else %}
+
+
+              <tbody class="{% cycle 'odd' 'even' %}">
+                 <tr>
+                   <td><a class="nav-link" href="{% url 'ultra_odds:ultradet' ultrasub.id %}">{{ultrasub.match_date}}</a></td>
+                   <td><a class="nav-link" href="{% url 'ultra_odds:ultradet' ultrasub.id %}">{{ultrasub.country}}</a></td>
+                   <td><a class="nav-link" href="{% url 'ultra_odds:ultradet' ultrasub.id %}">{{ultrasub.home_team}}</a></td>
+                   <td><a class="nav-link" href="{% url 'ultra_odds:ultradet' ultrasub.id %}">{{ultrasub.away_team}}</a></td>
+                   <td><a class="nav-link" href="{% url 'ultra_odds:ultradet' ultrasub.id %}">{{ultrasub.prediction}}</a></td>
+                   <td><a class="p-2 mb-1 bg-danger text-dark" href="{% url 'ultra_odds:ultradet' ultrasub.id %}">{{ultrasub.outcome}}</a></td>
+                 </tr>
+              </tbody>
+          {% endif %}
+
+      {% endfor %}
+      {% resetcycle %}
+
+      </table>
+
+
+ </ul>
+
+ {% endif %}
+{% endfor %}
+{% endblock %}
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+{% extends "daily_odds/base.html" %}
+{% load static %}
+{% block title %} Soccer {% endblock title%}
+{% block header %} <h4> Tips</h4> {% endblock %}
+
+{% block content %}
+
+{% for weeklymain in latest_weekly_list  %}
+
+<h2>{{weeklymain.slip_date}}</h2>
+<ul>
+
+
+      <table class="table table-striped ">
+
+          <thead class="thead-dark ">
+                 <tr>
+                     <th scope="col">Date</th>
+                     <th scope="col">country</th>
+                     <th scope="col">home team</th>
+                     <th scope="col">away team</th>
+                     <th scope="col">prediction</th>
+                     <th scope="col">outcome</th>
+
+                 </tr>
+
+          </thead>
+
+
+      {% for weeklysub in weeklymain.weeklysub_set.all %}
+
+
+
+          {% if weeklysub.outcome == null %}
+
+              <tbody>
+
+                 <tr>
+                   <td><a class="nav-link" href="{% url 'weekly_run:weekdet' weeklysub.id %}">{{weeklysub.match_date}}</a></td>
+                   <td><a class="nav-link" href="{% url 'weekly_run:weekdet' weeklysub.id %}">{{weeklysub.country}}</a></td>
+                   <td><a class="nav-link" href="{% url 'weekly_run:weekdet' weeklysub.id %}">{{weeklysub.home_team}}</a></td>
+                   <td><a class="nav-link" href="{% url 'weekly_run:weekdet' weeklysub.id %}">{{weeklysub.away_team}}</a></td>
+                   <td><a class="nav-link" href="{% url 'weekly_run:weekdet' weeklysub.id %}">{{weeklysub.prediction}}</a></td>
+                   <td><a class="p-2 mb-1 bg-warning text-dark" href="{% url 'weekly_run:weekdet' weeklysub.id %}">Running..</a></td>
+                 </tr>
+              </tbody>
+          {% elif weeklysub.outcome == weeklysub.prediction %}
+              <tbody>
+                 <tr>
+
+                   <td><a class="nav-link" href="{% url 'weekly_run:weekdet' weeklysub.id %}">{{weeklysub.match_date}}</a></td>
+                   <td><a class="nav-link" href="{% url 'weekly_run:weekdet' weeklysub.id %}">{{weeklysub.country}}</a></td>
+                   <td><a class="nav-link" href="{% url 'weekly_run:weekdet' weeklysub.id %}">{{weeklysub.home_team}}</a></td>
+                   <td><a class="nav-link" href="{% url 'weekly_run:weekdet' weeklysub.id %}">{{weeklysub.away_team}}</a></td>
+                   <td><a class="nav-link" href="{% url 'weekly_run:weekdet' weeklysub.id %}">{{weeklysub.prediction}}</a></td>
+                   <td><a class="p-2 mb-1 bg-success text-white" href="{% url 'weekly_run:weekdet' weeklysub.id %}">{{weeklysub.outcome}}</a></td>
+                 </tr>
+              </tbody>
+          {% else %}
+
+
+              <tbody>
+                 <tr>
+
+                   <td><a class="nav-link" href="{% url 'weekly_run:weekdet' weeklysub.id %}">{{weeklysub.match_date}}</a></td>
+                   <td><a class="nav-link" href="{% url 'weekly_run:weekdet' weeklysub.id %}">{{weeklysub.country}}</a></td>
+                   <td><a class="nav-link" href="{% url 'weekly_run:weekdet' weeklysub.id %}">{{weeklysub.home_team}}</a></td>
+                   <td><a class="nav-link" href="{% url 'weekly_run:weekdet' weeklysub.id %}">{{weeklysub.away_team}}</a></td>
+                   <td><a class="nav-link" href="{% url 'weekly_run:weekdet' weeklysub.id %}">{{weeklysub.prediction}}</a></td>
+                   <td><a class="p-2 mb-1 bg-danger text-dark"  href="{% url 'weekly_run:weekdet' weeklysub.id %}">{{weeklysub.outcome}}</a></td>
+                 </tr>
+              </tbody>
+          {% endif %}
+
+      {% endfor %}
+
+      </table>
+
+
+ </ul>
+
+
+{% endfor %}
+{% endblock %}
+</html>
