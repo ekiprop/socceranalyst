@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+{% extends "daily_odds/base.html" %}
+{% load static %}
+{% block title %} Soccer {% endblock title%}
+{% block header %} <h4> Tips</h4> {% endblock %}
+
+{% block content %}
+
+{% for ultramain in latest_prev_ultra_list  %}
+{% if ultramain.showing_prev %}
+<h2>{{ultramain.slip_date}}</h2>
+<ul>
+
+
+      <table class="table table-striped ">
+
+          <thead class="thead-dark ">
+                 <tr>
+                     <th scope="col">Date</th>
+                     <th scope="col">country</th>
+                     <th scope="col">home team</th>
+                     <th scope="col">away team</th>
+                     <th scope="col">prediction</th>
+                     <th scope="col">outcome</th>
+
+                 </tr>
+
+          </thead>
+
+
+      {% for ultrasub in ultramain.ultrasub_set.all %}
+
+
+
+          {% if ultrasub.outcome == null %}
+
+              <tbody>
+
+                 <tr>
+                   <td>{{ultrasub.match_date}}</td>
+                   <td>{{ultrasub.country}}</td>
+                   <td>{{ultrasub.home_team}}</td>
+                   <td>{{ultrasub.away_team}}</td>
+                   <td>{{ultrasub.prediction}}</td>
+                   <td class="p-2 mb-1 bg-warning text-dark">Running..</td>
+                 </tr>
+              </tbody>
+
+          {% elif ultrasub.outcome == ultrasub.prediction %}
+               <tbody>
+                 <tr>
+                   <td>{{ultrasub.match_date}}</td>
+                   <td>{{ultrasub.country}}</td>
+                   <td>{{ultrasub.home_team}}</td>
+                   <td>{{ultrasub.away_team}}</td>
+                   <td>{{ultrasub.prediction}}</td>
+                   <td class="p-2 mb-1 bg-success text-white">{{ultrasub.outcome}}</td>
+                 </tr>
+              </tbody>
+          {% else %}
+
+
+              <tbody>
+                 <tr>
+                   <td>{{ultrasub.match_date}}</td>
+                   <td>{{ultrasub.country}}</td>
+                   <td>{{ultrasub.home_team}}</td>
+                   <td>{{ultrasub.away_team}}</td>
+                   <td>{{ultrasub.prediction}}</td>
+                   <td class="p-2 mb-1 bg-danger text-dark" >{{ultrasub.outcome}}</td>
+                 </tr>
+              </tbody>
+          {% endif %}
+
+      {% endfor %}
+
+      </table>
+
+
+ </ul>
+
+{% endif %}
+{% endfor %}
+{% endblock %}
+</html>
