@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>{% block title %}  {% endblock title%}</title>
+     <link rel="stylesheet" type="text/css" href="{% static 'daily_odds/css/mtx.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'daily_odds/css/bootstrap.min.css' %}" />
+
+    <script src="{% static 'daily_odds/js/jquery3.3.1.js'%}"></script>
+
+
+    <script src="{% static 'daily_odds/js/bootstrap.min.js'%}"></script>
+
+</head>
+<body>
+ <div class="container-fluid">
+
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+          <a class="navbar-brand" href="#">SoccerPedia</a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+               aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav mr-auto">
+                  <li class="nav-item active"><a class="nav-link" href="{% url 'daily_odds:index'%}">Home <span class="sr-only">
+                      (current)</span> </a></li>
+                  <li class="nav-item dropdown">
+                      <a class="nav-link dropdown-toggle"  href="" id="navbarDropdown" role="button"
+                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">prev</a>
+                      <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                          <a class="dropdown-item" href="{% url 'history:prev_daily'%}"> daily tips</a>
+                          <a class="dropdown-item" href="{% url 'history:prev_ultra'%}"> ultra</a>
+                          <a class="dropdown-item" href="{% url 'history:prev_weekly'%}"> weekly</a>
+                      </div>
+                  </li>
+                  <li class="nav-item" ><a class="nav-link" href="{% url 'ultra_odds:ultra' %}">ultra</a></li>
+                  <li class="nav-item" ><a class="nav-link" href="{% url 'weekly_run:weekly' %}">week</a></li>
+              </ul>
+          </div>
+
+
+  </nav>
+ </div>
+  <div id="page-header">
+      {% block header %}{% endblock %}
+  </div>
+
+  <div id="content">
+      {% block content %}
+
+
+      {% endblock %}
+  </div>
+
+</body>
+<footer>
+<p > <center>&copy; 2018 Matrix Softwares Ltd. All rights reserved.</center></p>
+
+</footer>
+</html>
